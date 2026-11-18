@@ -30,9 +30,7 @@
 }
 
 *,*::before,*::after{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-
 html{ -webkit-text-size-adjust:100%; }
-
 body{
 margin:0;
 min-height:100dvh;
@@ -144,36 +142,13 @@ overflow: hidden;
 background: #111;
 border: 2px solid rgba(255,255,255,0.15);
 box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-transition: transform .4s var(--ease);
 }
-
-.editing .avatar { cursor: pointer; }
 
 .avatar img{
 width: 100%; height: 100%;
 object-fit: cover;
 filter: grayscale(0.2) contrast(1.1);
-transition: filter .5s, transform .5s var(--ease);
 }
-
-.editing .avatar:hover img{ filter: grayscale(0); transform: scale(1.05); }
-
-.avatar::after{
-content: "CAMBIA";
-position: absolute;
-inset: 0;
-display: grid;
-place-items: center;
-background: rgba(0,0,0,0.6);
-color: #fff;
-font-size: 9px;
-font-weight: 700;
-letter-spacing: .2em;
-opacity: 0;
-transition: opacity .3s;
-z-index: 2;
-}
-.editing .avatar:hover::after{ opacity: 1; }
 
 h1{
 font-family: "Cabinet Grotesk", sans-serif;
@@ -212,18 +187,6 @@ display: flex;
 justify-content: center;
 gap: 8px;
 flex-wrap: wrap;
-}
-
-.tag{
-font-size: 9.5px;
-letter-spacing: .15em;
-text-transform: uppercase;
-padding: 5px 12px;
-border: 1px solid var(--line);
-border-radius: 100px;
-background: rgba(255,255,255,0.03);
-color: var(--ink-soft);
-font-weight: 500;
 }
 
 .stack{
@@ -366,75 +329,6 @@ box-shadow: 0 10px 20px rgba(0,0,0,0.4);
 }
 }
 
-/* Pannello modifica Social & Sfondo */
-.social-editor {
-display: none;
-flex-direction: column;
-gap: 10px;
-margin-top: 18px;
-padding: 14px;
-border: 1px solid rgba(255,255,255,0.1);
-border-radius: 16px;
-background: rgba(18, 18, 22, 0.95);
-backdrop-filter: blur(12px);
-}
-
-.editing .social-editor { display: flex; }
-
-.social-editor-title {
-font-size: 10px;
-letter-spacing: 0.15em;
-text-transform: uppercase;
-color: var(--accent);
-font-weight: 700;
-margin-bottom: 2px;
-}
-
-.social-field {
-display: flex;
-align-items: center;
-gap: 10px;
-}
-
-.social-field label {
-width: 82px;
-flex: none;
-font-size: 11px;
-color: var(--ink-soft);
-font-weight: 500;
-}
-
-.social-field input {
-flex: 1;
-min-width: 0;
-font: inherit;
-font-size: 12px;
-padding: 8px 12px;
-border: 1px solid var(--line);
-border-radius: 10px;
-background: rgba(0,0,0,0.3);
-color: #fff;
-}
-
-.bg-editor-row {
-display: flex;
-gap: 8px;
-align-items: center;
-}
-
-.bg-editor-row button {
-flex: none;
-padding: 8px 12px;
-border: 1px solid var(--line);
-border-radius: 10px;
-background: rgba(255,255,255,0.05);
-font-size: 11px;
-color: var(--ink);
-font-weight: 600;
-transition: background .2s;
-}
-.bg-editor-row button:hover { background: rgba(255,255,255,0.15); }
-
 .actions{
 margin: 28px 0 0;
 padding-top: 20px;
@@ -476,126 +370,6 @@ text-transform: uppercase;
 color: #52525b;
 }
 
-[contenteditable="true"]{
-outline: 1px dashed var(--accent);
-outline-offset: 6px;
-border-radius: 4px;
-background: rgba(255, 59, 48, 0.05);
-}
-
-.edit-row{
-display: none;
-flex-direction: column;
-gap: 8px;
-margin-top: -6px;
-padding: 12px;
-border: 1px solid rgba(255,255,255,0.1);
-border-radius: 14px;
-background: rgba(18, 18, 22, 0.95);
-backdrop-filter: blur(12px);
-}
-
-.editing .edit-row{ display: flex; }
-
-.edit-inputs {
-display: flex;
-gap: 8px;
-}
-
-.edit-row input{
-min-width: 0;
-font: inherit;
-font-size: 12px;
-padding: 10px 12px;
-border: 1px solid var(--line);
-border-radius: 10px;
-background: rgba(0,0,0,0.3);
-color: #fff;
-}
-
-.edit-row input.txt{ flex: 1; }
-.edit-row input.url{ flex: 2; }
-.edit-row input.vid { width: 100%; }
-
-.edit-row-bottom {
-display: flex;
-justify-content: space-between;
-align-items: center;
-}
-
-.edit-row .del{
-flex: none;
-padding: 8px 14px;
-border: 1px solid rgba(255,59,48,0.3);
-border-radius: 8px;
-background: rgba(255,59,48,0.1);
-color: var(--accent);
-font-size: 10px;
-font-weight: 700;
-text-transform: uppercase;
-letter-spacing: 0.15em;
-transition: background .2s;
-}
-.edit-row .del:hover{ background: rgba(255,59,48,0.25); }
-
-.toolbar{
-position: fixed;
-left: 50%;
-bottom: calc(20px + env(safe-area-inset-bottom));
-transform: translate(-50%, 150%);
-z-index: 40;
-display: flex;
-flex-wrap: wrap;
-justify-content: center;
-gap: 6px;
-padding: 6px;
-border-radius: 28px;
-background: #18181b;
-border: 1px solid rgba(255,255,255,0.15);
-box-shadow: 0 20px 50px rgba(0,0,0,0.8);
-transition: transform .45s var(--ease);
-max-width: 92vw;
-}
-
-.toolbar.on{ transform: translate(-50%, 0); }
-
-.toolbar button{
-padding: 10px 14px;
-border-radius: 100px;
-font-size: 10.5px;
-letter-spacing: .1em;
-text-transform: uppercase;
-color: #fff;
-font-weight: 600;
-transition: background .25s;
-white-space: nowrap;
-}
-
-.toolbar button.save{ background: var(--accent); }
-.toolbar button:hover{ background: rgba(255,255,255,0.15); }
-.toolbar button.save:hover{ background: #e03228; }
-
-#setPass { display: none; }
-
-.gear{
-position: fixed;
-right: 20px;
-bottom: calc(20px + env(safe-area-inset-bottom));
-z-index: 39;
-width: 48px; height: 48px;
-border-radius: 50%;
-display: grid;
-place-items: center;
-background: #18181b;
-border: 1px solid rgba(255,255,255,0.15);
-color: #fff;
-box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-transition: transform .3s var(--ease), opacity .3s;
-}
-
-.gear svg{ width: 20px; height: 20px; }
-.gear:active{ transform: scale(.9); }
-
 .toast{
 position: fixed;
 left: 50%;
@@ -616,10 +390,6 @@ pointer-events: none;
 }
 
 .toast.on{ transform: translate(-50%, 0); }
-
-@media (prefers-reduced-motion:reduce){
-*,*::before,*::after{ animation-duration:.001s !important; transition-duration:.001s !important; }
-}
 </style>
 </head>
 <body>
@@ -635,34 +405,19 @@ pointer-events: none;
 
 <header class="profile">
 <div class="avatar-wrapper">
-<div class="avatar" id="avatar" role="button" tabindex="0" aria-label="Cambia foto profilo" title="Clicca per cambiare foto">
+<div class="avatar" id="avatar">
 <img id="avatarImg" src="avatar.jpg" alt="Ritratto di TRAPBOY" width="1536" height="1536" />
 </div>
 </div>
-<input type="file" id="avatarInput" accept="image/*" hidden />
 <h1 id="name">trapboy</h1>
 <p class="handle" id="handle">@trapboy</p>
 <p class="bio" id="bio">Rime contratte, silenzi lunghi. <b>Nuovo singolo in arrivo</b> — ascolta prima qui.</p>
-<div class="meta">
-</div>
+<div class="meta"></div>
 </header>
 
 <main class="stack" id="stack"></main>
 
-<!-- Icone social generate dinamicamente -->
 <nav class="socials" id="socials" aria-label="Social"></nav>
-
-<!-- Pannello modifica profili social e sfondo -->
-<div class="social-editor" id="socialEditor">
-<div class="social-editor-title">Sfondo Personalizzato</div>
-<div class="bg-editor-row">
-<input type="text" id="bgInput" placeholder="URL immagine o colore/gradiente CSS..." />
-<button id="bgUploadBtn">Carica Immagine</button>
-</div>
-<input type="file" id="bgFileInput" accept="image/*" hidden />
-
-<div class="social-editor-title" style="margin-top: 10px;">Link Profili Social (lascia vuoto per nascondere)</div>
-</div>
 
 <div class="actions">
 <button id="share">Condividi</button>
@@ -673,37 +428,15 @@ pointer-events: none;
 
 </div>
 
-<button class="gear" id="gear" aria-label="Modifica la pagina">
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3.2"/><path d="M12 3v2.4M12 18.6V21M4.2 7.5l2 1.2M17.8 15.3l2 1.2M4.2 16.5l2-1.2M17.8 8.7l2-1.2"/></svg>
-</button>
-
-<div class="toolbar" id="toolbar">
-<button id="addLink">+ Link</button>
-<button id="setPass">Password</button>
-<button class="save" id="save">Salva</button>
-<button id="reset">Reset</button>
-</div>
-
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
 (function(){
-const KEY = 'trapboy.bio.v3';
-const DEFAULT_HASH = '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4'; // "1234"
-
 const stack = document.getElementById('stack');
 const socialsNav = document.getElementById('socials');
-const socialEditor = document.getElementById('socialEditor');
 const bgLayer = document.getElementById('bgLayer');
-const bgInput = document.getElementById('bgInput');
-const bgUploadBtn = document.getElementById('bgUploadBtn');
-const bgFileInput = document.getElementById('bgFileInput');
-const toolbar = document.getElementById('toolbar');
 const toastEl = document.getElementById('toast');
-const avatarEl = document.getElementById('avatar');
 const avatarImg = document.getElementById('avatarImg');
-const avatarInput = document.getElementById('avatarInput');
-const setPassBtn = document.getElementById('setPass');
 
 const socialPlatforms = [
 {
@@ -733,8 +466,8 @@ svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1
 }
 ];
 
-const defaults = {
-passHash: DEFAULT_HASH,
+// Modifica direttamente qui i tuoi dati, i social e i link
+const data = {
 avatar: 'avatar.jpg',
 name: 'trapboy',
 handle: '@trapboy',
@@ -763,128 +496,10 @@ drop: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="
 link: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 13.5a4 4 0 0 0 5.7 0l2.6-2.6a4 4 0 0 0-5.7-5.7L11.3 6.5"/><path d="M14 10.5a4 4 0 0 0-5.7 0l-2.6 2.6a4 4 0 0 0 5.7 5.7l1.3-1.3"/></svg>'
 };
 
-let data = load();
-
-async function sha256(str){
-const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
-return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
-}
-
-function load(){
-try{
-const raw = localStorage.getItem(KEY);
-if(!raw) return structuredClone(defaults);
-const parsed = JSON.parse(raw);
-return {
-...structuredClone(defaults),
-...parsed,
-socials: { ...structuredClone(defaults.socials), ...(parsed.socials || {}) }
-};
-}catch(e){ return structuredClone(defaults); }
-}
-
-function save(){
-try{
-localStorage.setItem(KEY, JSON.stringify(data));
-}catch(e){
-toast('File troppo pesante per il salvataggio');
-}
-}
-
-avatarEl.addEventListener('click', () => {
-if(!document.body.classList.contains('editing')) return;
-avatarInput.click();
-});
-
-avatarInput.addEventListener('change', e => {
-const file = e.target.files && e.target.files[0];
-if(!file) return;
-
-const reader = new FileReader();
-reader.onload = ev => {
-const img = new Image();
-img.onload = () => {
-const canvas = document.createElement('canvas');
-const max = 512;
-let w = img.width, h = img.height;
-if(w > h){ if(w > max){ h = Math.round(h * max / w); w = max; } }
-else { if(h > max){ w = Math.round(w * max / h); h = max; } }
-canvas.width = w; canvas.height = h;
-canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-data.avatar = canvas.toDataURL('image/jpeg', 0.85);
-avatarImg.src = data.avatar;
-save();
-toast('Foto aggiornata');
-};
-img.src = ev.target.result;
-};
-reader.readAsDataURL(file);
-avatarInput.value = '';
-});
-
-// Gestione caricamento sfondo personalizzato da file
-bgUploadBtn.addEventListener('click', () => {
-bgFileInput.click();
-});
-
-bgFileInput.addEventListener('change', e => {
-const file = e.target.files && e.target.files[0];
-if(!file) return;
-
-const reader = new FileReader();
-reader.onload = ev => {
-const img = new Image();
-img.onload = () => {
-const canvas = document.createElement('canvas');
-const max = 1200; // Ottimizzato per sfondi
-let w = img.width, h = img.height;
-if(w > h){ if(w > max){ h = Math.round(h * max / w); w = max; } }
-else { if(h > max){ w = Math.round(w * max / h); h = max; } }
-canvas.width = w; canvas.height = h;
-canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-const res = canvas.toDataURL('image/jpeg', 0.85);
-data.background = 'url(' + res + ')';
-bgInput.value = data.background;
-applyBackground();
-save();
-toast('Sfondo aggiornato');
-};
-img.src = ev.target.result;
-};
-reader.readAsDataURL(file);
-bgFileInput.value = '';
-});
-
-bgInput.addEventListener('input', e => {
-data.background = e.target.value;
-applyBackground();
-});
-
-function applyBackground(){
-if(data.background && data.background.trim() !== ''){
-let val = data.background.trim();
-// Se l'utente inserisce un URL diretto senza url(...) o un colore, lo formattiamo correttamente
-if(!val.startsWith('url(') && !val.includes('gradient') && !val.startsWith('#') && !val.startsWith('rgb') && !val.startsWith('hsl')){
-val = 'url(' + val + ')';
-}
-bgLayer.style.setProperty('--custom-bg', val);
-} else {
-bgLayer.style.removeProperty('--custom-bg');
-}
-}
-
 function renderSocials(){
 socialsNav.innerHTML = '';
-
-// Rimuove eventuali campi social esistenti nel pannello per rigenerarli puliti
-const existingFields = socialEditor.querySelectorAll('.social-field');
-existingFields.forEach(f => f.remove());
-
-bgInput.value = data.background || '';
-
 socialPlatforms.forEach(p => {
 const url = (data.socials[p.id] || '').trim();
-
 if(url !== ''){
 const a = document.createElement('a');
 a.href = url;
@@ -894,28 +509,23 @@ a.setAttribute('aria-label', p.name);
 a.innerHTML = p.svg;
 socialsNav.appendChild(a);
 }
-
-const field = document.createElement('div');
-field.className = 'social-field';
-field.innerHTML =
-'<label>' + p.name + '</label>' +
-'<input type="url" value="' + esc(url) + '" placeholder="https://..." />';
-
-field.querySelector('input').addEventListener('input', e => {
-data.socials[p.id] = e.target.value;
-});
-
-socialEditor.appendChild(field);
 });
 }
 
 function render(){
-avatarImg.src = data.avatar || defaults.avatar;
+avatarImg.src = data.avatar;
 document.getElementById('name').textContent = data.name;
 document.getElementById('handle').textContent = data.handle;
 document.getElementById('bio').innerHTML = data.bio;
 
-applyBackground();
+if(data.background && data.background.trim() !== ''){
+let val = data.background.trim();
+if(!val.startsWith('url(') && !val.includes('gradient') && !val.startsWith('#') && !val.startsWith('rgb') && !val.startsWith('hsl')){
+val = 'url(' + val + ')';
+}
+bgLayer.style.setProperty('--custom-bg', val);
+}
+
 renderSocials();
 
 stack.innerHTML = '';
@@ -932,8 +542,7 @@ a.rel = 'noopener';
 
 const labelContainer = document.createElement('span');
 labelContainer.className = 'label';
-const textNode = document.createTextNode(l.label);
-labelContainer.appendChild(textNode);
+labelContainer.appendChild(document.createTextNode(l.label));
 
 if(l.sub){
 const subSpan = document.createElement('span');
@@ -961,50 +570,16 @@ embedUrl = embedUrl.replace('youtu.be/', 'www.youtube.com/embed/');
 }
 
 if(embedUrl.includes('embed/') || embedUrl.includes('iframe') || embedUrl.startsWith('http') && !embedUrl.match(/\.(mp4|webm|ogg)$/i)){
-videoPrev.innerHTML = '<iframe src="' + esc(embedUrl) + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+videoPrev.innerHTML = '<iframe src="' + embedUrl + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
 } else {
-videoPrev.innerHTML = '<video controls src="' + esc(l.video) + '"></video>';
+videoPrev.innerHTML = '<video controls src="' + l.video + '"></video>';
 }
 
 itemWrapper.appendChild(videoPrev);
 }
 
-const row = document.createElement('div');
-row.className = 'edit-row';
-row.innerHTML =
-'<div class="edit-inputs">' +
-'<input class="txt" value="' + esc(l.label) + '" placeholder="Testo link..." />' +
-'<input class="url" value="' + esc(l.url || '') + '" placeholder="URL destinazione..." />' +
-'</div>' +
-'<input class="vid" value="' + esc(l.video || '') + '" placeholder="URL Video / YouTube Embed (opzionale)..." />' +
-'<div class="edit-row-bottom">' +
-'<span style="font-size:10px; color:var(--ink-soft); letter-spacing:0.1em;">LINK CONFIG</span>' +
-'<button class="del">Elimina</button>' +
-'</div>';
-
-row.querySelector('.txt').addEventListener('input', e => {
-l.label = e.target.value;
-textNode.nodeValue = l.label;
-});
-row.querySelector('.url').addEventListener('input', e => {
-l.url = e.target.value;
-a.href = l.url || '#';
-});
-row.querySelector('.vid').addEventListener('input', e => {
-l.video = e.target.value;
-});
-row.querySelector('.del').addEventListener('click', () => {
-data.links.splice(i, 1);
-render();
-});
-
-itemWrapper.appendChild(row);
 stack.appendChild(itemWrapper);
 });
-}
-
-function esc(s){
-return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
 }
 
 let tId;
@@ -1029,65 +604,6 @@ try{ await navigator.share({ title:'TRAPBOY', url: location.href }); }catch(e){}
 try{ await navigator.clipboard.writeText(location.href); toast('Link copiato'); }
 catch(e){ toast(location.href); }
 }
-});
-
-const editable = ['name','handle','bio'].map(id => document.getElementById(id));
-
-document.getElementById('gear').addEventListener('click', async () => {
-const pin = prompt('Inserisci la password di amministrazione:');
-if(pin === null) return;
-
-const inputHash = await sha256(pin);
-const targetHash = data.passHash || DEFAULT_HASH;
-
-if(inputHash !== targetHash){
-toast('Password errata!');
-return;
-}
-
-document.body.classList.add('editing');
-toolbar.classList.add('on');
-document.getElementById('gear').style.display = 'none';
-setPassBtn.style.display = 'block';
-editable.forEach(el => el.contentEditable = 'true');
-toast('Modalità modifica sbloccata');
-});
-
-setPassBtn.addEventListener('click', async () => {
-const newPass = prompt('Inserisci la nuova password:');
-if(!newPass || newPass.trim() === '') return;
-
-const newHash = await sha256(newPass);
-data.passHash = newHash;
-save();
-toast('Password aggiornata con successo!');
-});
-
-document.getElementById('addLink').addEventListener('click', () => {
-data.links.push({ icon:'link', label:'Nuovo link', url:'https://', video:'' });
-render();
-});
-
-document.getElementById('save').addEventListener('click', () => {
-data.name = document.getElementById('name').textContent.trim() || 'name';
-data.handle = document.getElementById('handle').textContent.trim() || '@handle';
-data.bio = document.getElementById('bio').innerHTML.trim();
-save();
-document.body.classList.remove('editing');
-toolbar.classList.remove('on');
-document.getElementById('gear').style.display = 'grid';
-setPassBtn.style.display = 'none';
-editable.forEach(el => el.contentEditable = 'false');
-render();
-toast('Modifiche salvate');
-});
-
-document.getElementById('reset').addEventListener('click', () => {
-if (!confirm('Ripristinare il contenuto originale (inclusa la password 1234)?')) return;
-localStorage.removeItem(KEY);
-data = structuredClone(defaults);
-render();
-toast('Ripristinato');
 });
 
 render();
